@@ -71,10 +71,9 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
       console.log("TransactionsContext: Unsubscribing from realtime listener.");
       if (channel) {
         try {
-          // Ini adalah masalah umum di lingkungan pengembangan dengan Hot Module Reloading (HMR).
-          // Kesalahan 'channel.unsubscribe is not a function' sebenarnya berasal dari internal Supabase Realtime.
-          // Blok try-catch ini mencegah aplikasi crash, meskipun pesan kesalahan mungkin masih muncul di konsol.
-          supabase.removeChannel(channel.topic); 
+          // Menggunakan channel.unsubscribe() dan membungkusnya dalam try-catch
+          // untuk mengatasi masalah HMR di lingkungan pengembangan.
+          channel.unsubscribe(); 
         } catch (e) {
           console.error("TransactionsContext: Error during Supabase channel unsubscribe (likely HMR issue):", e);
         }
