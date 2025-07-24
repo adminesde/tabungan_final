@@ -1,5 +1,5 @@
 import { BarChart3, TrendingUp, TrendingDown } from 'lucide-react';
-import StatsCard from '../Dashboard/StatsCard';
+// Removed StatsCard import as it's not used directly in this component
 
 interface RecapitulasiSummaryCardsProps {
   totalDeposits: number;

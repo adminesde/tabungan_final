@@ -59,8 +59,7 @@ export default function Recapitulasi() {
           netAmount={netAmount}
           selectedDate={selectedDate}
           selectedClass={selectedClass}
-          userRole={user.role}
-          userClass={user.class}
+          user={user} // Pass the full user object
           allUsers={allUsers}
           includeClassColumn={includeClassColumn}
         />

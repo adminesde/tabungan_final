@@ -10,7 +10,7 @@ interface RecapitulasiFiltersProps {
   setSearchTerm: (term: string) => void;
   classes: string[];
   userRole: string | undefined;
-  userClass: string | undefined;
+  // userClass: string | undefined; // Removed as it's not used here
 }
 
 export default function RecapitulasiFilters({
@@ -22,7 +22,7 @@ export default function RecapitulasiFilters({
   setSearchTerm,
   classes,
   userRole,
-  userClass,
+  // userClass, // Removed from destructuring
 }: RecapitulasiFiltersProps) {
   return (
     <div className="bg-background rounded-xl shadow-sm border border-theme-border-light p-6">

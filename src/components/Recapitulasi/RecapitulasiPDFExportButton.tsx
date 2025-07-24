@@ -17,8 +17,7 @@ interface RecapitulasiPDFExportButtonProps {
   netAmount: number;
   selectedDate: string;
   selectedClass: string;
-  userRole: string | undefined;
-  userClass: string | undefined;
+  user: User | null; // Pass the full user object
   allUsers: User[];
   includeClassColumn: boolean;
 }
@@ -30,8 +29,7 @@ export default function RecapitulasiPDFExportButton({
   netAmount,
   selectedDate,
   selectedClass,
-  userRole,
-  userClass,
+  user, // Destructure user object
   allUsers,
   includeClassColumn,
 }: RecapitulasiPDFExportButtonProps) {
@@ -91,9 +89,9 @@ export default function RecapitulasiPDFExportButton({
         if (selectedClass) {
           currentY += 5;
           pdfDoc.text(`Kelas: ${selectedClass}`, pageWidth / 2, currentY, { align: 'center' });
-        } else if (userRole === 'teacher' && userClass) {
+        } else if (user?.role === 'teacher' && user.class) { // Use user.role and user.class from prop
           currentY += 5;
-          pdfDoc.text(`Kelas: ${userClass}`, pageWidth / 2, currentY, { align: 'center' });
+          pdfDoc.text(`Kelas: ${user.class}`, pageWidth / 2, currentY, { align: 'center' });
         }
         currentY += 15;
         pdfDoc.setFontSize(12);
@@ -125,9 +123,9 @@ export default function RecapitulasiPDFExportButton({
       if (selectedClass) {
         y += 5;
         doc.text(`Kelas: ${selectedClass}`, pageWidth / 2, y, { align: 'center' });
-      } else if (userRole === 'teacher' && userClass) {
+      } else if (user?.role === 'teacher' && user.class) { // Use user.role and user.class from prop
         y += 5;
-        doc.text(`Kelas: ${userClass}`, pageWidth / 2, y, { align: 'center' });
+        doc.text(`Kelas: ${user.class}`, pageWidth / 2, y, { align: 'center' });
       }
       y += 15;
 
@@ -206,7 +204,7 @@ export default function RecapitulasiPDFExportButton({
       const actualAdminUser = allUsers.find(u => u.role === 'admin');
       const adminSignatureName = actualAdminUser?.name ?? 'Nama Admin'; // Ensure string
 
-      if (userRole === 'admin') {
+      if (user?.role === 'admin') { // Use user.role from prop
         doc.setFontSize(10);
         doc.text('Mengetahui:', col1X, signatureY, { align: 'center' });
         doc.text('Kepala Sekolah', col1X, signatureY + lineHeight, { align: 'center' });
@@ -214,16 +212,17 @@ export default function RecapitulasiPDFExportButton({
 
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });
         doc.text(adminSignatureName, col2X, signatureY + lineHeight * 6, { align: 'center' });
-      } else {
-        const teacherSignatureName = userRole === 'teacher' ? (allUsers.find(u => u.id === user?.id)?.name ?? 'Nama Guru') : 'Nama Guru'; // Ensure string
+      } else if (user?.role === 'teacher') { // Use user.role from prop
+        const teacherSignatureName = user.name ?? 'Nama Guru'; // Use user.name directly from prop
         doc.setFontSize(10);
         doc.text('Mengetahui:', col1X, signatureY, { align: 'center' });
-        doc.text(`Guru Kelas ${selectedClass || (userRole === 'teacher' ? userClass || '' : '')}`, col1X, signatureY + lineHeight, { align: 'center' });
+        doc.text(`Guru Kelas ${selectedClass || (user.class || '')}`, col1X, signatureY + lineHeight, { align: 'center' }); // Use user.class from prop
         doc.text(teacherSignatureName, col1X, signatureY + lineHeight * 6, { align: 'center' });
 
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });
         doc.text(adminSignatureName, col2X, signatureY + lineHeight * 6, { align: 'center' });
       }
+
 
       doc.line(margin, pageHeight - 15, pageWidth - margin, pageHeight - 15);
       doc.setFontSize(8);

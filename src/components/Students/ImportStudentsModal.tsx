@@ -7,6 +7,7 @@ import { UploadCloud, FileText, Download, CheckCircle, XCircle, X } from 'lucide
 import { Student } from '../../types';
 import { supabase } from '../../integrations/supabase/client';
 import { showError, showSuccess } from '../../utils/toast'; // Re-importing to ensure it's recognized
+import { Button } from '../ui/button'; // Added missing import
 
 interface ImportStudentsModalProps {
   onClose: () => void;

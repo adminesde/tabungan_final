@@ -1,47 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react'; // Removed useEffect
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useStudents } from '../contexts/StudentsContext';
 import { useTransactions } from '../contexts/TransactionsContext';
 import { Filter, Calendar, Download, ArrowLeft, ArrowRight, BarChart3, TrendingUp, TrendingDown } from 'lucide-react';
 import { jsPDF } from 'jspdf';
-import { supabase } from '../integrations/supabase/client';
-import { type User } from '../types'; // Added 'type' keyword
+// Removed supabase import as it's not used directly here
+// Removed User import as it's not used directly here
 import { Button } from '../components/ui/button';
 
 export default function Reports() {
   const { user } = useAuth();
   const { students: allStudents } = useStudents();
   const { transactions: allTransactions } = useTransactions();
-  const [allUsers, setAllUsers] = useState<User[]>([]);
+  // Removed allUsers state and its useEffect
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*');
-
-      if (error) {
-        console.error("Error fetching users for reports:", error);
-      } else {
-        const fetchedUsers: User[] = data.map(profile => ({
-          id: profile.id,
-          name: `${profile.first_name} ${profile.last_name || ''}`.trim(),
-          email: profile.email,
-          role: profile.role as 'admin' | 'teacher' | 'parent',
-          class: profile.class || undefined,
-          createdAt: profile.created_at,
-          isActive: profile.is_active,
-        }));
-        setAllUsers(fetchedUsers);
-      }
-    };
-    fetchUsers();
-  }, []);
+  // Removed useEffect for fetching users as it's not needed here
 
   if (!user) return null;
 

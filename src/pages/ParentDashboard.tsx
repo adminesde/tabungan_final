@@ -6,7 +6,7 @@ import { useSavingsGoals } from '../contexts/SavingsGoalsContext';
 import StatsCard from '../components/Dashboard/StatsCard';
 import TransactionList from '../components/Transactions/TransactionList';
 import { DollarSign, TrendingUp, TrendingDown, Target, Clock, GraduationCap, Users, RefreshCw } from 'lucide-react';
-import { type SavingsGoal, User as SupabaseUser } from '../types'; // Added 'type' keyword
+import { User as SupabaseUser } from '../types'; // Removed 'type' keyword from SavingsGoal
 import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../integrations/supabase/client';

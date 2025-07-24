@@ -175,7 +175,7 @@ export default function Students() {
 
         <StudentTable
           students={paginatedStudents}
-          onView={handleViewStudent}
+          // Removed onView prop
           onEdit={canManageStudents ? handleEditStudent : undefined}
           onDelete={canManageStudents ? handleDeleteStudent : undefined}
           showPagination={true}
