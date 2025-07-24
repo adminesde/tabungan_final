@@ -70,8 +70,17 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
 
     return () => {
       console.log("TransactionsContext: Unsubscribing from realtime listener.");
-      if (channel) {
-        channel.unsubscribe(); // Direct unsubscribe
+      // Ensure supabase.removeChannel exists and is a function, and channel is a valid object
+      if (typeof supabase.removeChannel === 'function' && channel) {
+        try {
+          supabase.removeChannel(channel);
+        } catch (e) {
+          console.error("Error removing Supabase channel:", e);
+          // Log the channel object to understand why it might be failing
+          console.error("Failing channel object:", channel);
+        }
+      } else {
+        console.warn("Supabase removeChannel not available or channel object is null/undefined during cleanup.");
       }
     };
   }, [fetchTransactions, user, students, isAuthLoading]);
