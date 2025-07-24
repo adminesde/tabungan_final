@@ -91,7 +91,7 @@ export default function RecapitulasiPDFExportButton({
           pdfDoc.text(`Kelas: ${selectedClass}`, pageWidth / 2, currentY, { align: 'center' });
         } else if (user?.role === 'teacher' && user.class) { // Use user.role and user.class from prop
           currentY += 5;
-          pdfDoc.text(`Kelas: ${user.class ?? ''}`, pageWidth / 2, currentY, { align: 'center' });
+          pdfDoc.text(`Kelas: ${String(user.class ?? '')}`, pageWidth / 2, currentY, { align: 'center' });
         }
         currentY += 15;
         pdfDoc.setFontSize(12);
@@ -125,7 +125,7 @@ export default function RecapitulasiPDFExportButton({
         doc.text(`Kelas: ${selectedClass}`, pageWidth / 2, y, { align: 'center' });
       } else if (user?.role === 'teacher' && user.class) { // Use user.role and user.class from prop
         y += 5;
-        doc.text(`Kelas: ${user.class ?? ''}`, pageWidth / 2, y, { align: 'center' });
+        doc.text(`Kelas: ${String(user.class ?? '')}`, pageWidth / 2, y, { align: 'center' });
       }
       y += 15;
 
@@ -173,7 +173,7 @@ export default function RecapitulasiPDFExportButton({
 
         if (includeClassColumn) {
           doc.rect(currentX, y, tableHeaders[1].width, rowHeight);
-          doc.text(s.class, currentX + 2, y + (rowHeight / 2) + 2.5);
+          doc.text(String(s.class), currentX + 2, y + (rowHeight / 2) + 2.5);
           currentX += tableHeaders[1].width;
         }
 
@@ -211,16 +211,16 @@ export default function RecapitulasiPDFExportButton({
         doc.text('Karnadi, S.Pd.SD.', col1X, signatureY + lineHeight * 6, { align: 'center' });
 
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });
-        doc.text(adminSignatureName, col2X, signatureY + lineHeight * 6, { align: 'center' });
+        doc.text(String(adminSignatureName), col2X, signatureY + lineHeight * 6, { align: 'center' });
       } else if (user?.role === 'teacher') { // Use user.role from prop
         const teacherSignatureName = user.name ?? 'Nama Guru'; // Use user.name directly from prop
         doc.setFontSize(10);
         doc.text('Mengetahui:', col1X, signatureY, { align: 'center' });
-        doc.text(`Guru Kelas ${selectedClass || (user.class ?? '')}`, col1X, signatureY + lineHeight, { align: 'center' }); // Use user.class from prop
-        doc.text(teacherSignatureName, col1X, signatureY + lineHeight * 6, { align: 'center' });
+        doc.text(`Guru Kelas ${String(selectedClass || (user.class ?? ''))}`, col1X, signatureY + lineHeight, { align: 'center' }); // Use user.class from prop
+        doc.text(String(teacherSignatureName), col1X, signatureY + lineHeight * 6, { align: 'center' });
 
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });
-        doc.text(adminSignatureName, col2X, signatureY + lineHeight * 6, { align: 'center' });
+        doc.text(String(adminSignatureName), col2X, signatureY + lineHeight * 6, { align: 'center' });
       }
 
 

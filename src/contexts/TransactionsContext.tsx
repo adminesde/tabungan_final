@@ -71,9 +71,8 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
       console.log("TransactionsContext: Unsubscribing from realtime listener.");
       if (channel) {
         try {
-          // Menggunakan channel.unsubscribe() dan membungkusnya dalam try-catch
-          // untuk mengatasi masalah HMR di lingkungan pengembangan.
-          channel.unsubscribe(); 
+          // Menggunakan supabase.removeChannel(channel) untuk pelepasan yang benar
+          supabase.removeChannel(channel); 
         } catch (e) {
           console.error("TransactionsContext: Error during Supabase channel unsubscribe (likely HMR issue):", e);
         }
