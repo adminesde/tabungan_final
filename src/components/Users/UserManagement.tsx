@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { User } from '../../types';
 import { Plus, Search, Edit, Trash2, UserCheck, UserX, Users, Lock } from 'lucide-react';
 import UserForm from './UserForm';
@@ -36,7 +36,7 @@ export default function UserManagement() {
     fetchUsers();
     const channel = supabase
       .channel('profiles_changes')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => { // Removed payload parameter
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => {
         fetchUsers();
       })
       .subscribe();

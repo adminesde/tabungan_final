@@ -13,8 +13,6 @@ interface RegisterFormContentProps {
 }
 
 export default function RegisterFormContent({ onSuccess, onCancel, initialRole }: RegisterFormContentProps) {
-  const { /* login */ } = useAuth(); // Removed login as it's not used here
-  const [selectedRole, setSelectedRole] = useState<'teacher' | 'parent'>(initialRole); // Keep setSelectedRole if it's used internally
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,6 +20,7 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
     confirmPassword: '',
     class: '',
     parentName: '',
+    role: initialRole, // Use initialRole directly in formData
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -53,12 +52,12 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
       return;
     }
 
-    if (selectedRole === 'parent' && (!nisnStudentInfo || nisnError)) {
+    if (formData.role === 'parent' && (!nisnStudentInfo || nisnError)) {
       setError(nisnError || 'NISN tidak valid atau tidak ditemukan.');
       setIsLoading(false);
       return;
     }
-    if (selectedRole === 'parent' && !formData.parentName) {
+    if (formData.role === 'parent' && !formData.parentName) {
       setError('Nama Lengkap Orang Tua harus diisi.');
       setIsLoading(false);
       return;
@@ -71,7 +70,7 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
       let userClass = formData.class;
       let userNisn = nisn;
 
-      if (selectedRole === 'teacher') {
+      if (formData.role === 'teacher') {
         if (!formData.name || !formData.email || !formData.class) {
           setError('Semua kolom harus diisi.');
           setIsLoading(false);
@@ -80,7 +79,7 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
         const nameParts = formData.name.split(' ');
         firstName = nameParts[0];
         lastName = nameParts.slice(1).join(' ');
-      } else if (selectedRole === 'parent') {
+      } else if (formData.role === 'parent') {
         const parentNameParts = formData.parentName.split(' ');
         firstName = parentNameParts[0];
         lastName = parentNameParts.slice(1).join(' ');
@@ -94,7 +93,7 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
           password: formData.password,
           first_name: firstName,
           last_name: lastName,
-          role: selectedRole,
+          role: formData.role,
           class: userClass,
           nisn: userNisn,
         },
@@ -129,7 +128,6 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
   return (
     <div className="p-6 overflow-y-auto max-h-[calc(90vh-6rem)]">
       <h2 className="text-xl font-bold text-foreground mb-4">Daftar Akun Baru</h2>
-      {/* Removed the top "Kembali ke Login" button as requested */}
 
       <form onSubmit={handleSubmit} className="space-y-2">
         {error && (
@@ -138,7 +136,7 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
           </div>
         )}
 
-        {selectedRole === 'teacher' && (
+        {formData.role === 'teacher' && (
           <>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
@@ -190,7 +188,7 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
           </>
         )}
 
-        {selectedRole === 'parent' && (
+        {formData.role === 'parent' && (
           <>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
@@ -296,9 +294,9 @@ export default function RegisterFormContent({ onSuccess, onCancel, initialRole }
           </Button>
           <Button
             type="submit"
-            disabled={isLoading || (selectedRole === 'parent' && (!nisnStudentInfo || isLoadingNisnLookup || !formData.parentName))}
+            disabled={isLoading || (formData.role === 'parent' && (!nisnStudentInfo || isLoadingNisnLookup || !formData.parentName))}
             className="flex-1 flex items-center justify-center space-x-2"
-            variant={selectedRole === 'parent' ? 'accent-green' : 'accent-blue'}
+            variant={formData.role === 'parent' ? 'accent-green' : 'accent-blue'}
           >
             {isLoading || isLoadingNisnLookup ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

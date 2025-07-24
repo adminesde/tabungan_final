@@ -60,7 +60,8 @@ export function SavingsGoalsProvider({ children }: { children: ReactNode }) {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel.topic); // Corrected
+      // Corrected: removeChannel expects the channel object itself, not its topic string
+      supabase.removeChannel(channel);
     };
   }, [fetchSavingsGoals, user]);
 

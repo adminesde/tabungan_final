@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react'; // Removed React import
+import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useStudents } from '../contexts/StudentsContext';
 import { useTransactions } from '../contexts/TransactionsContext';
 import TransactionList from '../components/Transactions/TransactionList';
 import TransactionForm from '../components/Transactions/TransactionForm';
 import { Plus, Filter, Calendar, Trash2, GraduationCap } from 'lucide-react';
-// Removed Transaction import
 import { Button } from '../components/ui/button';
 import {
   AlertDialog,
@@ -37,9 +36,9 @@ export default function Transactions() {
   if (!user) return null;
 
   // Filter students based on user role for the TransactionForm dropdown
-  const studentsForForm = user.role === 'teacher' 
-    ? allStudents.filter(s => s.class === user.class)
-    : allStudents;
+  // const studentsForForm = user.role === 'teacher' 
+  //   ? allStudents.filter(s => s.class === user.class)
+  //   : allStudents; // Removed as it's not used
 
   const filteredTransactions = transactions.filter(transaction => {
     const matchesType = filterType === 'all' || transaction.type === filterType;

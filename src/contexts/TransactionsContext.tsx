@@ -61,9 +61,8 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
     
     const channel = supabase
       .channel('transactions_changes')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'transactions' }, payload => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'transactions' }, () => { // Removed payload parameter
         console.log("TransactionsContext: Realtime change detected, re-fetching transactions.");
-        console.log("TransactionsContext: Realtime payload received:", payload);
         fetchTransactions();
       })
       .subscribe();
@@ -102,7 +101,7 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
       newBalance -= newTransactionData.amount;
     }
 
-    const { error: transactionError } = await supabase // Removed transactionData as it's unused
+    const { error: transactionError } = await supabase
       .from('transactions')
       .insert({
         student_id: newTransactionData.studentId,

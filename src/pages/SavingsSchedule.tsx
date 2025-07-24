@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useSavingsGoals } from '../contexts/SavingsGoalsContext';
 import { useStudents } from '../contexts/StudentsContext';
@@ -7,7 +7,7 @@ import SavingsGoalForm from '../components/Savings/SavingsGoalForm';
 import { SavingsGoal, User as SupabaseUser } from '../types';
 import { Button } from '../components/ui/button';
 import { useIsMobile } from '../hooks/useIsMobile';
-import { supabase } from '../integrations/supabase/client'; // Added import
+import { supabase } from '../integrations/supabase/client';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,7 +42,7 @@ export default function SavingsSchedule() {
       if (error) {
         console.error("Error fetching users for savings schedule:", error);
       } else {
-        const fetchedUsers: SupabaseUser[] = data.map((profile: any) => ({ // Added type for profile
+        const fetchedUsers: SupabaseUser[] = data.map((profile: any) => ({
           id: profile.id,
           name: `${profile.first_name} ${profile.last_name || ''}`.trim(),
           email: profile.email,

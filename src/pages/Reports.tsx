@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react'; // Removed React import
+import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useStudents } from '../contexts/StudentsContext';
 import { useTransactions } from '../contexts/TransactionsContext';
-import { Filter, Calendar, Download, ArrowLeft, ArrowRight, BarChart3, TrendingUp, TrendingDown } from 'lucide-react'; // Removed GraduationCap, Users, DollarSign
+import { Filter, Calendar, Download, ArrowLeft, ArrowRight, BarChart3, TrendingUp, TrendingDown } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import { supabase } from '../integrations/supabase/client';
-import { User } from '../types'; // Keep User import for type definition
+import { type User } from '../types'; // Added 'type' keyword
 import { Button } from '../components/ui/button';
 
 export default function Reports() {
   const { user } = useAuth();
   const { students: allStudents } = useStudents();
   const { transactions: allTransactions } = useTransactions();
-  const [allUsers, setAllUsers] = useState<User[]>([]); // Keep allUsers state if it's used for PDF generation
+  const [allUsers, setAllUsers] = useState<User[]>([]);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [selectedClass, setSelectedClass] = useState('');

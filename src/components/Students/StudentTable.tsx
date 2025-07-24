@@ -1,8 +1,6 @@
-import { useState } from 'react'; // Removed useEffect
+import { useState } from 'react';
 import { Student } from '../../types';
 import { User, Edit, Trash2, ArrowLeft, ArrowRight } from 'lucide-react';
-// Removed supabase import as parents state is removed
-// Removed User as SupabaseUser import as parents state is removed
 import { Button } from '../ui/button';
 import {
   AlertDialog,
@@ -18,7 +16,7 @@ import {
 
 interface StudentTableProps {
   students: Student[];
-  onView: (student: Student) => void;
+  // onView: (student: Student) => void; // Removed as it's not used in this component
   onEdit?: (student: Student) => void;
   onDelete?: (studentId: string, studentName: string) => void;
   showPagination?: boolean;
@@ -29,7 +27,7 @@ interface StudentTableProps {
 
 export default function StudentTable({ 
   students,
-  onView, 
+  // onView, // Removed from destructuring
   onEdit, 
   onDelete,
   showPagination = false,
@@ -37,10 +35,7 @@ export default function StudentTable({
   totalPages = 1,
   onPageChange
 }: StudentTableProps) {
-  // Removed parents state
   const [studentToDelete, setStudentToDelete] = useState<{ id: string; name: string } | null>(null);
-
-  // Removed useEffect for fetching parents
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {
@@ -104,6 +99,7 @@ export default function StudentTable({
                 </td>
                 <td className="py-3 px-4">
                   <div className="flex items-center justify-center space-x-2">
+                    {/* Removed onView button as it's not used */}
                     {onEdit && (
                       <Button
                         variant="ghost"

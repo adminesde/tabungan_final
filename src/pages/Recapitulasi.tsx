@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useStudents } from '../contexts/StudentsContext';
 import { useTransactions } from '../contexts/TransactionsContext';
 import { jsPDF } from 'jspdf';
 import { supabase } from '../integrations/supabase/client';
-import { User as SupabaseUser }
- from '../types';
+import { User as SupabaseUser } from '../types';
 import { Filter, Calendar, Search, Download, BarChart3, TrendingUp, TrendingDown, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useIsMobile } from '../hooks/useIsMobile';
@@ -288,7 +287,7 @@ export default function Recapitulasi() {
       const col2X = pageWidth * 3 / 4;
 
       const actualAdminUser = allUsers.find(u => u.role === 'admin');
-      const adminSignatureName = actualAdminUser ? actualAdminUser.name : 'Nama Admin';
+      const adminSignatureName = actualAdminUser?.name ?? 'Nama Admin'; // Ensure string
 
       if (user.role === 'admin') {
         doc.setFontSize(10);
@@ -299,10 +298,10 @@ export default function Recapitulasi() {
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });
         doc.text(adminSignatureName, col2X, signatureY + lineHeight * 6, { align: 'center' });
       } else {
-        const teacherSignatureName = user.name;
+        const teacherSignatureName = user.name ?? 'Nama Guru'; // Ensure string
         doc.setFontSize(10);
         doc.text('Mengetahui:', col1X, signatureY, { align: 'center' });
-        doc.text(`Guru Kelas ${selectedClass || (user.role === 'teacher' ? user.class || '' : '')}`, col1X, signatureY + lineHeight, { align: 'center' }); // Ensure string
+        doc.text(`Guru Kelas ${selectedClass || (user.role === 'teacher' ? user.class || '' : '')}`, col1X, signatureY + lineHeight, { align: 'center' });
         doc.text(teacherSignatureName, col1X, signatureY + lineHeight * 6, { align: 'center' });
 
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });
@@ -312,6 +311,7 @@ export default function Recapitulasi() {
       doc.line(margin, pageHeight - 15, pageWidth - margin, pageHeight - 15);
       doc.setFontSize(8);
       doc.text('SIBUDIS - Anang Creative Production', pageWidth / 2, pageHeight - 10, { align: 'center' });
+      doc.text('Terimakasih telah menggunakan layanan kami.', pageWidth / 2, pageHeight - 5, { align: 'center' });
 
       if (isMobile) {
         window.open(doc.output('bloburl'), '_blank');

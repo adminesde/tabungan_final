@@ -6,8 +6,7 @@ import { useAuth } from '../../contexts/Auth/AuthContext';
 import { UploadCloud, FileText, Download, CheckCircle, XCircle, X } from 'lucide-react';
 import { Student } from '../../types';
 import { supabase } from '../../integrations/supabase/client';
-import { showError, showSuccess } from '../../utils/toast';
-import { Button } from '../ui/button';
+import { showError, showSuccess } from '../../utils/toast'; // Re-importing to ensure it's recognized
 
 interface ImportStudentsModalProps {
   onClose: () => void;
@@ -155,7 +154,7 @@ export default function ImportStudentsModal({ onClose }: ImportStudentsModalProp
 
   const modalContent = (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-background rounded-xl shadow-xl max-w-md w-full max-h-[90vh] flex flex-col"> {/* Added flex flex-col */}
+      <div className="bg-background rounded-xl shadow-xl max-w-md w-full max-h-[90vh] flex flex-col">
         <div className="flex items-center justify-between p-6 border-b border-theme-border-light">
           <h2 className="text-xl font-bold text-foreground">Import Data Siswa</h2>
           <Button
@@ -167,7 +166,7 @@ export default function ImportStudentsModal({ onClose }: ImportStudentsModalProp
           </Button>
         </div>
 
-        <div className="p-6 space-y-4 flex-1 overflow-y-auto"> {/* Added flex-1 overflow-y-auto */}
+        <div className="p-6 space-y-4 flex-1 overflow-y-auto">
           <p className="text-sm text-muted-foreground">
             Unggah file XLSX untuk menambahkan banyak data siswa sekaligus. Pastikan file Anda memiliki kolom: <span className="font-semibold">Nama Siswa</span> (huruf), <span className="font-semibold">NISN</span> (10 digit angka), dan <span className="font-semibold">Kelas</span> (angka).
             {user.role === 'teacher' && (

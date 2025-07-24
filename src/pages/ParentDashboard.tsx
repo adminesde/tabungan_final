@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useStudents } from '../contexts/StudentsContext';
 import { useTransactions } from '../contexts/TransactionsContext';
@@ -6,7 +6,7 @@ import { useSavingsGoals } from '../contexts/SavingsGoalsContext';
 import StatsCard from '../components/Dashboard/StatsCard';
 import TransactionList from '../components/Transactions/TransactionList';
 import { DollarSign, TrendingUp, TrendingDown, Target, Clock, GraduationCap, Users, RefreshCw } from 'lucide-react';
-import { SavingsGoal, User as SupabaseUser } from '../types';
+import { type SavingsGoal, User as SupabaseUser } from '../types'; // Added 'type' keyword
 import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../integrations/supabase/client';
@@ -216,7 +216,7 @@ export default function ParentDashboard() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {parentClassGoals.map((goal) => ( // Added .map here
+            {parentClassGoals.map((goal) => (
               <div key={goal.id} className="bg-card rounded-xl shadow-sm border border-theme-border-light p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
