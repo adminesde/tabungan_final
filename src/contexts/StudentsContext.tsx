@@ -67,18 +67,11 @@ export function StudentsProvider({ children }: { children: ReactNode }) {
       .subscribe();
 
     return () => {
-      console.log("StudentsContext: Unsubscribing from realtime listener.");
-      // Ensure supabase.removeChannel exists and is a function, and channel is a valid object
-      if (typeof supabase.removeChannel === 'function' && channel) {
-        try {
-          supabase.removeChannel(channel);
-        } catch (e) {
-          console.error("Error removing Supabase channel:", e);
-          // Log the channel object to understand why it might be failing
-          console.error("Failing channel object:", channel);
-        }
+      console.log("StudentsContext: Unsubscribing from realtime listener. Channel object:", channel);
+      if (channel && typeof channel.unsubscribe === 'function') {
+        channel.unsubscribe(); // Direct unsubscribe
       } else {
-        console.warn("Supabase removeChannel not available or channel object is null/undefined during cleanup.");
+        console.warn("StudentsContext: Channel object or unsubscribe method not available during cleanup.");
       }
     };
   }, [fetchStudents, user, isAuthLoading]);
