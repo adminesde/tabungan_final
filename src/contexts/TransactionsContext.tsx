@@ -70,7 +70,7 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
 
     return () => {
       console.log("TransactionsContext: Unsubscribing from realtime listener.");
-      supabase.removeChannel(channel.topic); // Corrected
+      supabase.removeChannel(channel); // Corrected: Pass the channel object itself
     };
   }, [fetchTransactions, user, students, isAuthLoading]);
 
