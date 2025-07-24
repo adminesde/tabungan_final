@@ -91,7 +91,7 @@ export default function RecapitulasiPDFExportButton({
           pdfDoc.text(`Kelas: ${selectedClass}`, pageWidth / 2, currentY, { align: 'center' });
         } else if (user?.role === 'teacher' && user.class) { // Use user.role and user.class from prop
           currentY += 5;
-          pdfDoc.text(`Kelas: ${user.class}`, pageWidth / 2, currentY, { align: 'center' });
+          pdfDoc.text(`Kelas: ${user.class ?? ''}`, pageWidth / 2, currentY, { align: 'center' });
         }
         currentY += 15;
         pdfDoc.setFontSize(12);
@@ -125,7 +125,7 @@ export default function RecapitulasiPDFExportButton({
         doc.text(`Kelas: ${selectedClass}`, pageWidth / 2, y, { align: 'center' });
       } else if (user?.role === 'teacher' && user.class) { // Use user.role and user.class from prop
         y += 5;
-        doc.text(`Kelas: ${user.class}`, pageWidth / 2, y, { align: 'center' });
+        doc.text(`Kelas: ${user.class ?? ''}`, pageWidth / 2, y, { align: 'center' });
       }
       y += 15;
 
@@ -216,7 +216,7 @@ export default function RecapitulasiPDFExportButton({
         const teacherSignatureName = user.name ?? 'Nama Guru'; // Use user.name directly from prop
         doc.setFontSize(10);
         doc.text('Mengetahui:', col1X, signatureY, { align: 'center' });
-        doc.text(`Guru Kelas ${selectedClass || (user.class || '')}`, col1X, signatureY + lineHeight, { align: 'center' }); // Use user.class from prop
+        doc.text(`Guru Kelas ${selectedClass || (user.class ?? '')}`, col1X, signatureY + lineHeight, { align: 'center' }); // Use user.class from prop
         doc.text(teacherSignatureName, col1X, signatureY + lineHeight * 6, { align: 'center' });
 
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });

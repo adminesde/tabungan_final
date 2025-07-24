@@ -43,9 +43,7 @@ export default function Students() {
   const paginatedStudents = filteredStudents.slice(startIndex, startIndex + itemsPerPage);
   const classes = [...new Set(students.map(s => s.class))].sort();
 
-  const handleViewStudent = (student: Student) => {
-    console.log('View student details:', student);
-  };
+  // Removed handleViewStudent as it's not used
 
   const handleAddStudent = () => {
     setEditingStudent(undefined);

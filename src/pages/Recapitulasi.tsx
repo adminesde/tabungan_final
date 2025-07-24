@@ -74,7 +74,6 @@ export default function Recapitulasi() {
         setSearchTerm={(term) => { setSearchTerm(term); setCurrentPage(1); }}
         classes={classes}
         userRole={user.role}
-        userClass={user.class}
       />
 
       <RecapitulasiSummaryCards

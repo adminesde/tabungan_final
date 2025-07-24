@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/Auth/AuthContext';
 import { UploadCloud, FileText, Download, CheckCircle, XCircle, X } from 'lucide-react';
 import { Student } from '../../types';
 import { supabase } from '../../integrations/supabase/client';
-import { showError, showSuccess } from '../../utils/toast'; // Re-importing to ensure it's recognized
+import { showError } from '../../utils/toast'; // Removed showSuccess as it's not used
 import { Button } from '../ui/button'; // Added missing import
 
 interface ImportStudentsModalProps {

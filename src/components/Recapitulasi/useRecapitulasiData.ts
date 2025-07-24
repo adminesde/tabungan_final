@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/Auth/AuthContext';
 import { useStudents } from '../../contexts/StudentsContext';
 import { useTransactions } from '../../contexts/TransactionsContext';
 import { supabase } from '../../integrations/supabase/client';
-import { User, Student, Transaction } from '../../types';
+import { User, Student } from '../../types';
 
 interface StudentSummary extends Student {
   totalDeposits: number;
