@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Removed React import
 import ReactDOM from 'react-dom';
 import { X, User, Lock } from 'lucide-react';
 import { Button } from '../ui/button';

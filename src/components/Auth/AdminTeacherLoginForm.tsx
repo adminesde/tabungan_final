@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { User, Lock, LogIn, Eye, EyeOff } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useAuth } from '../../contexts/Auth/AuthContext';
 import { showSuccess, showError } from '../../utils/toast';
-import RegisterFormContent from './RegisterForm';
-import ForgotPasswordForm from './ForgotPasswordForm';
+// Removed unused imports: RegisterFormContent, ForgotPasswordForm
 
 interface AdminTeacherLoginFormProps {
   onShowRegister: () => void;
@@ -100,12 +99,12 @@ export default function AdminTeacherLoginForm({ onShowRegister, onShowForgotPass
         >
           {isLoading ? (
             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          ) : (
-            <>
-              <LogIn className="w-5 h-5" />
-              <span>Masuk</span>
-            </>
-          )}
+            ) : (
+              <>
+                <LogIn className="w-5 h-5" />
+                <span>Masuk</span>
+              </>
+            )}
         </Button>
         <div className="mt-6 pt-6 border-t border-gray-200 text-center">
           <p className="text-sm text-muted-foreground mb-3">

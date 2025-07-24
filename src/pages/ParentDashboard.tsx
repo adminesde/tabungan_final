@@ -71,15 +71,6 @@ export default function ParentDashboard() {
     }).format(amount);
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(date);
-  };
-
   const translateDayOfWeek = (day: string) => {
     switch (day) {
       case 'Monday': return 'Senin';

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react'; // Removed useEffect
 import { Student } from '../../types';
 import { User, Edit, Trash2, ArrowLeft, ArrowRight } from 'lucide-react';
-import { supabase } from '../../integrations/supabase/client';
-import { User as SupabaseUser } from '../../types';
+// Removed supabase import as parents state is removed
+// Removed User as SupabaseUser import as parents state is removed
 import { Button } from '../ui/button';
 import {
   AlertDialog,
@@ -37,31 +37,10 @@ export default function StudentTable({
   totalPages = 1,
   onPageChange
 }: StudentTableProps) {
-  const [parents, setParents] = useState<SupabaseUser[]>([]);
+  // Removed parents state
   const [studentToDelete, setStudentToDelete] = useState<{ id: string; name: string } | null>(null);
 
-  useEffect(() => {
-    const fetchParents = async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('role', 'parent');
-      if (error) {
-        console.error("Error fetching parents:", error);
-      } else {
-        const fetchedParents: SupabaseUser[] = data.map(profile => ({
-          id: profile.id,
-          name: `${profile.first_name} ${profile.last_name || ''}`.trim(),
-          email: profile.email,
-          role: profile.role as 'admin' | 'teacher' | 'parent',
-          createdAt: profile.created_at,
-          isActive: profile.is_active,
-        }));
-        setParents(fetchedParents);
-      }
-    };
-    fetchParents();
-  }, []);
+  // Removed useEffect for fetching parents
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {

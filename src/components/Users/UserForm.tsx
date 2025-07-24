@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Removed React import
 import ReactDOM from 'react-dom';
 import { User as UserType } from '../../types';
 import { X, User as UserIcon, Mail, Lock, GraduationCap, Hash, Eye, EyeOff } from 'lucide-react';
@@ -400,7 +400,7 @@ export default function UserForm({ user, onSubmit, onClose }: UserFormProps) {
               {isSubmitting ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
-                user ? 'Update' : 'Simpan'
+                user ? 'Simpan' : 'Simpan'
               )}
             </Button>
           </div>

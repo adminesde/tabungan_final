@@ -36,7 +36,7 @@ export default function UserManagement() {
     fetchUsers();
     const channel = supabase
       .channel('profiles_changes')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, payload => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => { // Removed payload parameter
         fetchUsers();
       })
       .subscribe();

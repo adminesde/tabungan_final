@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Removed React import
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useStudents } from '../contexts/StudentsContext';
 import { useTransactions } from '../contexts/TransactionsContext';
 import StatsCard from '../components/Dashboard/StatsCard';
 import TransactionList from '../components/Transactions/TransactionList';
-import { Users, DollarSign, TrendingUp, TrendingDown, GraduationCap, UserCheck, RefreshCw } from 'lucide-react';
+import { Users, DollarSign, TrendingUp, TrendingDown, GraduationCap, RefreshCw } from 'lucide-react'; // Removed UserCheck
 import { supabase } from '../integrations/supabase/client';
 import { User } from '../types';
 import { Button } from '../components/ui/button';
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
               onClick={handleRefreshClassSummary}
               className="flex items-center space-x-2"
               variant="outline"
-              title="Refresh Data Kelas"
+              title="Refresh Data"
             >
               <RefreshCw className="w-4 h-4" />
               <span className="hidden sm:inline">Refresh</span>

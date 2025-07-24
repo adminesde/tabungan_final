@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react'; // Removed useCallback
 import { User, AuthContextType } from '../../types';
 import { supabase } from '../../integrations/supabase/client';
 import { showSuccess, showError } from '../../utils/toast';

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { SavingsGoal } from '../../types';
-import { X, GraduationCap, Users, Target, Clock } from 'lucide-react';
+import { X, GraduationCap, Users, Clock } from 'lucide-react'; // Removed Target
 import { useStudents } from '../../contexts/StudentsContext';
 import { Button } from '../ui/button';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Student } from '../../types';
 import { User, DollarSign } from 'lucide-react';
 import { Button } from '../ui/button';

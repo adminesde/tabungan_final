@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react'; // Removed React import
 import ReactDOM from 'react-dom';
 import { User as UserType } from '../../types';
 import { X, Lock, Save, Eye, EyeOff } from 'lucide-react';

@@ -13,8 +13,8 @@ interface RegisterFormContentProps {
 }
 
 export default function RegisterFormContent({ onSuccess, onCancel, initialRole }: RegisterFormContentProps) {
-  const { login } = useAuth();
-  const [selectedRole, setSelectedRole] = useState<'teacher' | 'parent'>(initialRole);
+  const { /* login */ } = useAuth(); // Removed login as it's not used here
+  const [selectedRole, setSelectedRole] = useState<'teacher' | 'parent'>(initialRole); // Keep setSelectedRole if it's used internally
   const [formData, setFormData] = useState({
     name: '',
     email: '',

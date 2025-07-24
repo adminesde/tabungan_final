@@ -68,7 +68,7 @@ export function StudentsProvider({ children }: { children: ReactNode }) {
 
     return () => {
       console.log("StudentsContext: Unsubscribing from realtime listener.");
-      supabase.removeChannel(channel);
+      supabase.removeChannel(channel.topic); // Corrected
     };
   }, [fetchStudents, user, isAuthLoading]);
 

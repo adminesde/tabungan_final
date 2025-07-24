@@ -60,7 +60,7 @@ export function SavingsGoalsProvider({ children }: { children: ReactNode }) {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      supabase.removeChannel(channel.topic); // Corrected
     };
   }, [fetchSavingsGoals, user]);
 

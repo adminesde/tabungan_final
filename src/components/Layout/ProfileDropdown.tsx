@@ -21,12 +21,7 @@ export default function ProfileDropdown({ onClose, onOpenProfileModal }: Profile
     onClose();
   };
 
-  const getUserDisplayName = () => {
-    if (user.role === 'parent' && user.studentInfo) {
-      return user.studentInfo.name;
-    }
-    return user.name;
-  };
+  // Removed getUserDisplayName as it's not used here
 
   const getRoleLabel = (role: string) => {
     switch (role) {

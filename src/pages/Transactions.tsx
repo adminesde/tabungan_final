@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Removed React import
 import { useAuth } from '../contexts/Auth/AuthContext';
 import { useStudents } from '../contexts/StudentsContext';
 import { useTransactions } from '../contexts/TransactionsContext';
 import TransactionList from '../components/Transactions/TransactionList';
 import TransactionForm from '../components/Transactions/TransactionForm';
 import { Plus, Filter, Calendar, Trash2, GraduationCap } from 'lucide-react';
-import { Transaction } from '../types';
+// Removed Transaction import
 import { Button } from '../components/ui/button';
 import {
   AlertDialog,

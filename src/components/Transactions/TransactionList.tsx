@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Removed React import
 import { Transaction, Student } from '../../types';
 import { ArrowUpCircle, ArrowDownCircle, Calendar, User, Download, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useStudents } from '../../contexts/StudentsContext';

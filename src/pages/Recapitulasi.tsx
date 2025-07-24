@@ -247,7 +247,7 @@ export default function Recapitulasi() {
         const nameHeight = nameLines.length * lineHeight;
         rowHeight = Math.max(rowHeight, nameHeight + 2);
 
-        if (y + rowHeight + 6 * lineHeight + 20 > pageHeight - margin) {
+        if (y + rowHeight + 6 * lineHeight + 20 > pageHeight - margin) { // Adjusted for footer
           y = addPageWithHeaders(doc, y);
         }
         doc.setFontSize(9);
@@ -302,7 +302,7 @@ export default function Recapitulasi() {
         const teacherSignatureName = user.name;
         doc.setFontSize(10);
         doc.text('Mengetahui:', col1X, signatureY, { align: 'center' });
-        doc.text(`Guru Kelas ${selectedClass || (user.role === 'teacher' ? user.class : '')}`, col1X, signatureY + lineHeight, { align: 'center' });
+        doc.text(`Guru Kelas ${selectedClass || (user.role === 'teacher' ? user.class || '' : '')}`, col1X, signatureY + lineHeight, { align: 'center' }); // Ensure string
         doc.text(teacherSignatureName, col1X, signatureY + lineHeight * 6, { align: 'center' });
 
         doc.text('Admin Aplikasi', col2X, signatureY, { align: 'center' });

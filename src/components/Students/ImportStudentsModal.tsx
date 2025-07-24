@@ -95,10 +95,9 @@ export default function ImportStudentsModal({ onClose }: ImportStudentsModalProp
           const isValidClass = typeof studentClass === 'string' && /^\d+$/.test(studentClass);
 
           const isClassAllowed = user.role === 'admin' || (user.role === 'teacher' && studentClass === user.class);
+          const isDuplicate = existingNisnSet.has(nisn); // Declare isDuplicate here
 
           if (isValidName && isValidNisn && isValidClass && isClassAllowed) {
-            const isDuplicate = existingNisnSet.has(nisn);
-
             if (!isDuplicate) {
               studentsToAdd.push({
                 name: name.trim(),

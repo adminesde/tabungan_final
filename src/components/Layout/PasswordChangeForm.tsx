@@ -10,7 +10,7 @@ interface PasswordChangeFormProps {
 }
 
 export default function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
-  const { user } = useAuth();
+  const { /* user */ } = useAuth(); // Removed user as it's not used here
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [formError, setFormError] = useState('');

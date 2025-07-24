@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Lock, LogIn, Hash, Eye, EyeOff } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useAuth } from '../../contexts/Auth/AuthContext';
 import { useNisnLookup } from '../../hooks/useNisnLookup';
 import { showSuccess, showError } from '../../utils/toast';
-import RegisterFormContent from './RegisterForm';
-import ForgotPasswordForm from './ForgotPasswordForm';
+// Removed unused imports: RegisterFormContent, ForgotPasswordForm
 
 interface ParentLoginFormProps {
   onShowRegister: () => void;
@@ -122,12 +121,12 @@ export default function ParentLoginForm({ onShowRegister, onShowForgotPassword }
         >
           {isLoading || isLoadingNisnLookup ? (
             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          ) : (
-            <>
-              <LogIn className="w-5 h-5" />
-              <span>Masuk</span>
-            </>
-          )}
+            ) : (
+              <>
+                <LogIn className="w-5 h-5" />
+                <span>Masuk</span>
+              </>
+            )}
         </Button>
         <div className="mt-6 pt-6 border-t border-gray-200 text-center">
           <p className="text-sm text-muted-foreground mb-3">

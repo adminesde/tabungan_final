@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react'; // Removed React import
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import RegisterFormContent from '../components/Auth/RegisterForm';

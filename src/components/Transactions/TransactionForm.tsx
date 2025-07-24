@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 import { useAuth } from '../../contexts/Auth/AuthContext';
 import { useSavingsGoals } from '../../contexts/SavingsGoalsContext';
 import { useStudents } from '../../contexts/StudentsContext';
-import { Student } from '../../types';
+// Removed Student import
 
 interface TransactionFormProps {
   onSubmit: (data: {

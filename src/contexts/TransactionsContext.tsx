@@ -70,7 +70,7 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
 
     return () => {
       console.log("TransactionsContext: Unsubscribing from realtime listener.");
-      supabase.removeChannel(channel);
+      supabase.removeChannel(channel.topic); // Corrected
     };
   }, [fetchTransactions, user, students, isAuthLoading]);
 
@@ -93,7 +93,7 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
       newBalance -= newTransactionData.amount;
     }
 
-    const { data: transactionData, error: transactionError } = await supabase
+    const { error: transactionError } = await supabase // Removed transactionData as it's unused
       .from('transactions')
       .insert({
         student_id: newTransactionData.studentId,
