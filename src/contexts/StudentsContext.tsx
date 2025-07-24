@@ -73,7 +73,7 @@ export function StudentsProvider({ children }: { children: ReactNode }) {
           // Ini adalah masalah umum di lingkungan pengembangan dengan Hot Module Reloading (HMR).
           // Kesalahan 'channel.unsubscribe is not a function' sebenarnya berasal dari internal Supabase Realtime.
           // Blok try-catch ini mencegah aplikasi crash, meskipun pesan kesalahan mungkin masih muncul di konsol.
-          channel.unsubscribe(); 
+          supabase.removeChannel(channel.topic); 
         } catch (e) {
           console.error("StudentsContext: Error during Supabase channel unsubscribe (likely HMR issue):", e);
         }
