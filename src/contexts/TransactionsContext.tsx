@@ -69,11 +69,16 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
       .subscribe();
 
     return () => {
-      console.log("TransactionsContext: Unsubscribing from realtime listener. Channel object:", channel);
-      if (channel && typeof channel.unsubscribe === 'function') {
-        channel.unsubscribe(); // Direct unsubscribe
-      } else {
-        console.warn("TransactionsContext: Channel object or unsubscribe method not available during cleanup.");
+      console.log("TransactionsContext: Unsubscribing from realtime listener.");
+      if (channel) {
+        try {
+          // This error (channel.unsubscribe is not a function) often occurs due to
+          // Supabase Realtime's internal state during Hot Module Reloading (HMR) in development.
+          // Wrapping in try-catch to prevent app crash.
+          channel.unsubscribe(); 
+        } catch (e) {
+          console.error("TransactionsContext: Error during Supabase channel unsubscribe (likely HMR issue):", e);
+        }
       }
     };
   }, [fetchTransactions, user, students, isAuthLoading]);
